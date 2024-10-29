@@ -1,0 +1,23 @@
+from odoo import models, fields
+
+class MeuModelo(models.Model):
+    _name = 'meu.modelo'
+
+    tipo = fields.Selection([
+        ('tipo1', 'Tipo 1'),
+        ('tipo2', 'Tipo 2'),
+    ], string="Tipo")
+
+    campo_selecao = fields.Selection(
+        selection='_get_opcoes_campo_selecao', 
+        string="Campo Condicional"
+    )
+
+    def _get_opcoes_campo_selecao(self):
+        # Define as opções com base no valor do campo 'tipo'
+        if self.tipo == 'tipo1':
+            return [('opcao1', 'Opção 1'), ('opcao2', 'Opção 2')]
+        elif self.tipo == 'tipo2':
+            return [('opcao3', 'Opção 3'), ('opcao4', 'Opção 4')]
+        else:
+            return []
